@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anniversary Lucky Draw</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: #fffbe7;
+      padding-top: 40px;
+    }
+    img.logo {
+      width: 160px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    h2 {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 40px;
+    }
+    .wheel {
+      margin: 0 auto;
+      width: 300px;
+      height: 300px;
+      border: 8px solid #f2b03d;
+      border-radius: 50%;
+      position: relative;
+      background: conic-gradient(#fdd835 0% 25%, #ffecb3 25% 50%, #ffcc80 50% 75%, #ffe0b2 75% 100%);
+    }
+    .spin-button {
+      margin-top: 30px;
+      padding: 10px 30px;
+      font-size: 18px;
+      background: #f57c00;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <img src="assets/logo.png" alt="LOGO" class="logo">
+  <h1>Taizhou Hangge Pump Co., Ltd</h1>
+  <h2>Anniversary Lucky Draw · One Spin, One Prize</h2>
+
+  <div class="wheel" id="wheel">🎁</div>
+  <button class="spin-button" onclick="startDraw()">Good Luck!</button>
+
+  <div id="result"></div>
+
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function startDraw() {
+      const token = getQueryParam("token");
+      const name = getQueryParam("name");
+      const amount = parseFloat(getQueryParam("amount"));
+
+      const saved = localStorage.getItem(`draw_${token}`);
+      if (!saved) {
+        alert("Invalid or expired draw link.");
+        return;
+      }
+
+      const record = JSON.parse(saved);
+      if (record.drawn) {
+        document.getElementById("result").innerHTML = "You have already participated.";
+        return;
+      }
+
+      const prize = getPrize(amount);
+      record.drawn = true;
+      record.prize = prize;
+      localStorage.setItem(`draw_${token}`, JSON.stringify(record));
+
+      document.getElementById("result").innerHTML =
+        `🎊 Congratulations!<br>You won: <strong>${prize}</strong><br><br>
+        Thanks for celebrating with us – we’ll be in touch with your prize!`;
+  
+    function getPrize(amount) {
+      // 简化奖池逻辑示例（真实逻辑应来自 prizes.js）
+      if (amount >= 100000) {
+        return pick(["iPhone 16", "iPad Air", "Apple Watch", "Airwheel Smart Luggage"]);
+      } else if (amount >= 70000) {
+        return pick(["Panasonic Coffee Maker", "Philips Ice Maker", "Pearl Jewelry Set", "Harman/Kardon Speaker"]);
+      } else if (amount >= 40000) {
+        return pick(["4-Person Tent", "Yixing Teapot Set", "BBQ Grill", "Pearl Necklace"]);
+      } else {
+        return pick(["Bone Conduction Headphones", "Polo Shirt", "$10 Coupon", "Camping Tarp"]);
+      }
+    }
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+  </script>
+<script src="prizes.js"></script>
+<script src="draw.js"></script>
+</body>
+</html>

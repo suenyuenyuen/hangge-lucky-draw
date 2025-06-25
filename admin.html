@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Draw Link</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #fdf6e3;
+    }
+    h1 {
+      color: #b85c38;
+    }
+    label, input, button {
+      display: block;
+      margin: 1rem 0;
+    }
+    input {
+      padding: 0.5rem;
+      width: 300px;
+    }
+    button {
+      padding: 0.6rem 1rem;
+      background-color: #ff6f3c;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #linkOutput {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Hangge Lucky Draw Link Generator</h1>
+  <label>Customer Name:</label>
+  <input type="text" id="customer" placeholder="Enter customer name">
+
+  <label>Order Amount (USD):</label>
+  <input type="number" id="amount" placeholder="e.g. 35000">
+
+  <button onclick="generateLink()">Generate Draw Link</button>
+
+  <div id="linkOutput"></div>
+
+  <script>
+    function generateToken(length = 12) {
+      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      return Array.from({length}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+    }
+
+    function generateLink() {
+      const customer = document.getElementById("customer").value.trim();
+      const amount = parseFloat(document.getElementById("amount").value);
+      if (!customer || isNaN(amount)) {
+        alert("Please enter valid customer name and amount.");
+        return;
+      }
+
+      const token = generateToken();
+      const url = `draw.html?token=${token}&name=${encodeURIComponent(customer)}&amount=${amount}`;
+      localStorage.setItem(`draw_${token}`, JSON.stringify({ customer, amount, drawn: false }));
+
+      document.getElementById("linkOutput").innerHTML = `
+        Link generated:<br>
+        <a href="${url}" target="_blank">${url}</a>
+      `;
+    }
+  </script>
+</body>
+</html>
