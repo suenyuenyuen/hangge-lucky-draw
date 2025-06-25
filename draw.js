@@ -41,7 +41,10 @@ function startDraw() {
 
   const record = JSON.parse(saved);
   if (record.drawn) {
-    document.getElementById("result").innerHTML = "You have already participated.";
+    document.getElementById("giftBox").innerHTML = "🎉";
+    document.getElementById("clickTip").style.display = "none";
+    document.getElementById("result").innerHTML =
+      "🎁 Already opened!<br>You got: <strong>" + record.prize + "</strong>";
     return;
   }
 
@@ -49,6 +52,11 @@ function startDraw() {
   record.drawn = true;
   record.prize = prize;
   localStorage.setItem(`draw_${token}`, JSON.stringify(record));
+
+  // 显示结果
+  document.getElementById("giftBox").style.pointerEvents = "none";
+  document.getElementById("giftBox").innerHTML = "🎉";
+  document.getElementById("clickTip").style.display = "none";
 
   document.getElementById("result").innerHTML =
     `🎊 Congratulations!<br>You won: <strong>${prize}</strong><br><br>

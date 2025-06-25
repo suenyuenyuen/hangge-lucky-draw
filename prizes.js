@@ -1,6 +1,5 @@
 // prizes.js
 
-// 定义不同金额区间的奖池及概率（总和应为100）
 const prizePools = [
   {
     min: 100000,
@@ -8,7 +7,7 @@ const prizePools = [
       { name: "iPhone 16", weight: 25 },
       { name: "iPad Air", weight: 25 },
       { name: "Apple Watch", weight: 25 },
-      { name: "Airwheel Smart Luggage", weight: 25 },
+      { name: "Airwheel Smart Luggage", weight: 25 }
     ]
   },
   {
@@ -18,7 +17,7 @@ const prizePools = [
       { name: "Merach Rowing Machine", weight: 25 },
       { name: "Harman/Kardon Bluetooth Speaker", weight: 25 },
       { name: "Panasonic Coffee Maker", weight: 25 },
-      { name: "Philips Ice Maker", weight: 25 },
+      { name: "Philips Ice Maker", weight: 25 }
     ]
   },
   {
@@ -28,7 +27,7 @@ const prizePools = [
       { name: "Harman/Kardon Bluetooth Speaker", weight: 25 },
       { name: "Panasonic Coffee Maker", weight: 25 },
       { name: "Philips Ice Maker", weight: 25 },
-      { name: "Pearl Jewelry Set", weight: 25 },
+      { name: "Pearl Jewelry Set", weight: 25 }
     ]
   },
   {
@@ -38,7 +37,7 @@ const prizePools = [
       { name: "Panasonic Coffee Maker", weight: 25 },
       { name: "Philips Ice Maker", weight: 25 },
       { name: "Pearl Jewelry Set", weight: 25 },
-      { name: "Yixing Teapot & Teacup Set", weight: 25 },
+      { name: "Yixing Teapot & Teacup Set", weight: 25 }
     ]
   },
   {
@@ -48,7 +47,7 @@ const prizePools = [
       { name: "Philips Ice Maker", weight: 25 },
       { name: "Pearl Jewelry Set", weight: 25 },
       { name: "Yixing Teapot & Teacup Set", weight: 25 },
-      { name: "4-Person Automatic Tent", weight: 25 },
+      { name: "4-Person Automatic Tent", weight: 25 }
     ]
   },
   {
@@ -58,7 +57,7 @@ const prizePools = [
       { name: "Pearl Jewelry Set", weight: 25 },
       { name: "Yixing Teapot & Teacup Set", weight: 25 },
       { name: "4-Person Automatic Tent", weight: 25 },
-      { name: "Gourd-Shaped Pearl Necklace", weight: 25 },
+      { name: "Gourd-Shaped Pearl Necklace", weight: 25 }
     ]
   },
   {
@@ -68,7 +67,7 @@ const prizePools = [
       { name: "Yixing Teapot & Teacup Set", weight: 25 },
       { name: "4-Person Automatic Tent", weight: 25 },
       { name: "Gourd-Shaped Pearl Necklace", weight: 25 },
-      { name: "Portable Outdoor BBQ Grill", weight: 25 },
+      { name: "Portable Outdoor BBQ Grill", weight: 25 }
     ]
   },
   {
@@ -78,7 +77,7 @@ const prizePools = [
       { name: "4-Person Automatic Tent", weight: 30 },
       { name: "Foldable Camping Table", weight: 30 },
       { name: "Camping Wagon", weight: 30 },
-      { name: "Camping Tarp", weight: 10 },
+      { name: "Camping Tarp", weight: 10 }
     ]
   },
   {
@@ -88,7 +87,7 @@ const prizePools = [
       { name: "Camping Wagon", weight: 40 },
       { name: "Camping Tarp", weight: 40 },
       { name: "Bone Conduction Headphones", weight: 15 },
-      { name: "Polo Shirt", weight: 5 },
+      { name: "Polo Shirt", weight: 5 }
     ]
   },
   {
@@ -98,7 +97,7 @@ const prizePools = [
       { name: "Camping Tarp", weight: 40 },
       { name: "Bone Conduction Headphones", weight: 40 },
       { name: "Polo Shirt", weight: 15 },
-      { name: "$10 Discount Coupon", weight: 5 },
+      { name: "$10 Discount Coupon", weight: 5 }
     ]
   }
 ];
