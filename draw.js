@@ -33,13 +33,25 @@ function startDraw() {
   const name = getQueryParam("name");
   const amount = parseFloat(getQueryParam("amount"));
 
-  const saved = localStorage.getItem(`draw_${token}`);
-  if (!saved) {
-    alert("Invalid or expired draw link.");
+  if (!token || !amount || isNaN(amount)) {
+    alert("Missing or invalid draw link.");
     return;
   }
 
-  const record = JSON.parse(saved);
+  // 自动初始化记录（新逻辑）
+  const existing = localStorage.getItem(`draw_${token}`);
+  if (!existing) {
+    const initial = {
+      customer: name || "Guest",
+      amount: amount,
+      drawn: false,
+      prize: null
+    };
+    localStorage.setItem(`draw_${token}`, JSON.stringify(initial));
+  }
+
+  const record = JSON.parse(localStorage.getItem(`draw_${token}`));
+
   if (record.drawn) {
     document.getElementById("giftBox").innerHTML = "🎉";
     document.getElementById("clickTip").style.display = "none";
@@ -57,7 +69,6 @@ function startDraw() {
   document.getElementById("giftBox").style.pointerEvents = "none";
   document.getElementById("giftBox").innerHTML = "🎉";
   document.getElementById("clickTip").style.display = "none";
-
   document.getElementById("result").innerHTML =
     `🎊 Congratulations!<br>You won: <strong>${prize}</strong><br><br>
     Thanks for celebrating with us – we’ll be in touch with your prize!`;
