@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Export Draw Records</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 100px 20px;
+      background-color: #fdfdfd;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 26px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #16a085;
+    }
+    p {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎁 Export Draw Records</h1>
+  <button onclick="exportWinners()">Download as CSV</button>
+  <p>* Only records saved on this browser will be exported.</p>
+
+  <script>
+    function exportWinners() {
+      const data = JSON.parse(localStorage.getItem("draw_records") || "[]");
+      if (data.length === 0) {
+        alert("No draw records found on this browser.");
+        return;
+      }
+
+      let csv = "Token,Name,Amount,Prize,Time\n";
+      data.forEach(record => {
+        csv += `${record.token},${record.name},${record.amount},${record.prize},${record.time}\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "draw_results.csv");
+      link.click();
+    }
+  </script>
+</body>
+</html>
